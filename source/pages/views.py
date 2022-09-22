@@ -16,4 +16,9 @@ def contact_view(request, *args, **kwargs):
 
 def about_view(request, *args, **kwargs):
     # return HttpResponse("<h1>About Page</h1>")
-    return render(request, "about.html", {})
+    context = {
+        "text": "This is about me!",
+        "number": 128,
+        "my_list": list(range(8)),
+    }
+    return render(request, "about.html", context)
