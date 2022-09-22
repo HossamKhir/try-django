@@ -4,7 +4,13 @@
 <p>{{ text }}, {{ number }} {{ my_list }}</p>
 <ul>
   {% for item in my_list %}
+  <!-- best practice is to keep control flow in backend (.py files) -->
+  {% if item == 4 %}
+  <li>{{ item|add:32 }}</li>
+  {% elif item == 5 %}
+  <li>Whoa!!</li>
+  {% else %}
   <li>{{ item }}</li>
-  {% endfor %}
+  {% endif %} {% endfor %}
 </ul>
 {% endblock %}
