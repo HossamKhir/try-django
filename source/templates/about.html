@@ -2,4 +2,9 @@
 <h1>About!</h1>
 <p>This is a template!</p>
 <p>{{ text }}, {{ number }} {{ my_list }}</p>
+<ul>
+  {% for item in my_list %}
+  <li>{{ item }}</li>
+  {% endfor %}
+</ul>
 {% endblock %}
