@@ -1,6 +1,7 @@
 from django.shortcuts import render
 
-from .forms import ProductForm, RawProductForm
+# from .forms import RawProductForm
+from .forms import ProductForm
 from .models import Product
 
 
@@ -50,3 +51,22 @@ def product_create_view(request):
 #         "form": form,
 #     }
 #     return render(request, "products/product_create.html", context)
+
+
+def render_initial_data(request):
+    initial_data = {
+        "title": "Awesome",
+    }
+    obj = Product.objects.get(id=1)
+    form = ProductForm(
+        request.POST or None,
+        initial=initial_data,
+        # instance=obj, # to be able to change a given object
+    )
+    if form.is_valid():
+        form.save()
+        form = ProductForm()
+    context = {
+        "form": form,
+    }
+    return render(request, "products/product_create.html", context)
