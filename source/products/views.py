@@ -57,7 +57,7 @@ def render_initial_data(request):
     initial_data = {
         "title": "Awesome",
     }
-    obj = Product.objects.get(id=1)
+    # obj = Product.objects.get(id=1)
     form = ProductForm(
         request.POST or None,
         initial=initial_data,
@@ -70,3 +70,11 @@ def render_initial_data(request):
         "form": form,
     }
     return render(request, "products/product_create.html", context)
+
+
+def dynamic_lookup_view(request, id):
+    obj = Product.objects.get(id=id)
+    context = {
+        "object": obj,
+    }
+    return render(request, "products/product_detail.html", context)
