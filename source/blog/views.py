@@ -1,5 +1,7 @@
-from django.shortcuts import render, get_object_or_404
-from django.views.generic import DetailView, ListView
+from django.shortcuts import get_object_or_404, render
+from django.views.generic import CreateView, DetailView, ListView, UpdateView
+
+from .forms import ArticleModelForm
 
 # Create your views here.
 from .models import Article
@@ -18,3 +20,32 @@ class ArticleDetailView(DetailView):
     def get_object(self):
         _id = self.kwargs.get("id")
         return get_object_or_404(Article, id=_id)
+
+
+class ArticleCreateView(CreateView):
+    template_name = "articles/article_create.html"
+    form_class = ArticleModelForm
+    queryset = Article.objects.all()
+    # NOTE: by default, on success the app redirects to the url of the newly
+    #   created instance, hence the get_absolute_url method should be
+    #   implemented on the model
+    # NOTE: to override that either set success_url or implement get_success_url
+    # success_url = "/"
+
+    def form_valid(self, form):
+        # print(form.cleaned_data)
+        return super().form_valid(form)
+
+    # def get_success_url(self) -> str:
+    #     return "/"
+
+
+class ArticleUpdateView(UpdateView):
+    template_name = "articles/article_create.html"
+    form_class = ArticleModelForm
+    queryset = Article.objects.all()
+
+    def get_object(self):
+        _id = self.kwargs.get("id")
+        return get_object_or_404(Article, id=_id)
+
