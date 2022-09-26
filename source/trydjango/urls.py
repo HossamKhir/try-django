@@ -41,4 +41,5 @@ urlpatterns = [
     # path("product/<int:id>/update", product_update_view, name="product-update"),
     path("products/", include("products.urls")),
     path("blog/", include("blog.urls")),
+    path("course/", include("courses.urls")),
 ]
