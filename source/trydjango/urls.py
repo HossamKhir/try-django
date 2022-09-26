@@ -33,7 +33,7 @@ urlpatterns = [
     path("contact/", contact_view),
     path("about/", about_view),
     # path("product/", product_detail_view),
-    # # path("create/", product_create_view),
+    # path("create/", product_create_view),
     # path("create/", render_initial_data),
     # path("product/<int:id>/", dynamic_lookup_view, name="product-detail"),
     # path("product/<int:id>/delete/", product_delete_view, name="product-delete"),
