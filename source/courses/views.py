@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views import View
 
 from .forms import CourseModelForm
@@ -78,4 +78,30 @@ class CourseUpdateView(View):
                 form.save()
             context["form"] = form
             context["object"] = obj
+        return render(request, self.template_name, context)
+
+
+class CourseDeleteView(View):
+    template_name = "courses/course_delete.html"
+
+    def get_object(self):
+        id = self.kwargs.get("id")
+        if id:
+            obj = get_object_or_404(Course, id=id)
+            return obj
+
+    def get(self, request, *args, **kwargs):
+        context = {}
+        obj = self.get_object()
+        if obj:
+            context["object"] = obj
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        context = {}
+        obj = self.get_object()
+        if obj:
+            obj.delete()
+            context["object"] = None
+            return redirect("/course/")
         return render(request, self.template_name, context)
