@@ -117,6 +117,7 @@ class CourseObjectMixin:
             obj = get_object_or_404(self.model, id=id)
             return obj
 
+
 class CourseView(CourseObjectMixin, View):
     template_name = "courses/course_detail.html"
 
@@ -126,6 +127,7 @@ class CourseView(CourseObjectMixin, View):
         #     obj = get_object_or_404(Course, id=id)
         #     context["object"] = obj
         return render(request, self.template_name, context)
+
 
 class CourseUpdateView(CourseObjectMixin, View):
     template_name = "courses/course_update.html"

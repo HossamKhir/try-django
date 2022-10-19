@@ -1,5 +1,5 @@
 # from django.http import Http404
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 
 # from .forms import RawProductForm
 from .forms import ProductForm
@@ -87,7 +87,6 @@ def dynamic_lookup_view(request, id):
 
 def product_delete_view(request, id):
     obj = get_object_or_404(Product, id=id)
-    print(request.method)
     if request.method == "POST":
         obj.delete()
         return redirect("../../")
